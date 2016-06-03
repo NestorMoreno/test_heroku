@@ -8,12 +8,12 @@
 
 var bodyParser = require('body-parser');
 var express = require('express');
-//var fbsub = require("fbsub");
+var fbsub = require("fbsub");
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
-console.log('Se ha subido la aplicacion en el puerto 5000-');
+console.log('Se ha subido la aplicacion en el puerto 5000.');
 console.log('http://localhost:5000/');
 app.use(bodyParser.json());
 
