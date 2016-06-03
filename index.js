@@ -20,6 +20,16 @@ app.use(bodyParser.json());
 
 
 
+ 
+fbsub.init({
+    appId: 164231482595,
+    appSecret: a4292a0aae9cb62cfd507dd485d696aa,
+    verifyToken: EAAAAJjz1jOMBAK91lXnjNMNK4qWAjZA6TnvRxNdp8vayXkj6E6zsWzDXK7DlNlWqh0GHTdOE4zfq9Bp1KqMoZAWXCpZChg2lyzRHgNM9Ta4ZCIfrdZC3WWvgpgKW5TZC5HWjUSmv617iZBRHKGfsfdEn0A7HDCnb98506jyI1oZCmAZDZD,
+    callbackUrl: 'https://tiendaf.herokuapp.com/facebook',
+});
+
+
+
 
 
 
