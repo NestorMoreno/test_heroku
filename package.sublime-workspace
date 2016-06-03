@@ -1,0 +1,217 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"res",
+				"response"
+			],
+			[
+				"fun",
+				"function"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Desk/Polla/centuryBet/www/js/controllers.js",
+		"/C/Desk/Polla/centuryBet/www/js/routes.js",
+		"/C/Desk/tiendaf/test_heroku/index.js",
+		"/C/Desk/Polla/centuryBet/platforms/android/build.gradle",
+		"/C/Desk/Polla/centuryBet/google-services.json",
+		"/C/Desk/Polla/centuryBet/www/js/app.js",
+		"/C/Desk/Polla/centuryBet/www/index.html",
+		"/C/Desk/Polla/centuryBet/www/data.json",
+		"/C/Desk/Polla/centuryBet/config.xml",
+		"/C/Users/Administrador/CentenaryApp/www/templates/Invitations.html",
+		"/C/Users/Administrador/CentenaryApp/www/js/services.js",
+		"/C/Users/Administrador/CentenaryApp/www/js/controllers.js",
+		"/C/Users/Administrador/CentenaryApp/www/templates/InvitationsContacts.html",
+		"/C/Users/Administrador/CentenaryApp/www/js/app.js",
+		"/C/Users/Administrador/CentenaryApp/www/js/routes.js",
+		"/C/Users/Administrador/CentenaryApp/www/index.html",
+		"/C/Users/Administrador/CentenaryApp/www/lib/ng-infinite-scroll.min.js",
+		"/C/Users/Administrador/CentenaryApp/platforms/android/assets/www/lib/ionic/css/ionic.min.css",
+		"/C/Users/Administrador/CentenaryApp/config.xml",
+		"/C/Desk/Polla/centuryBet/platforms/android/assets/www/js/services.js",
+		"/C/Desk/Polla/centuryBet/www/templates/InvitationsContacts.html",
+		"/C/Desk/Polla/centuryBet/www/templates/Invitations.html",
+		"/C/Desk/Polla/centuryBet/www/templates/modal.html",
+		"/C/Desk/Polla/centuryBet/www/templates/menu.html",
+		"/C/Desk/Polla/centuryBet/www/templates/Friends.html",
+		"/C/Desk/Polla/centuryBet/www/templates/tabsController.html",
+		"/C/Desk/Polla/centuryBet/www/templates/login.html",
+		"/C/Desk/Polla/centuryBet/plugins/fetch.json",
+		"/C/Desk/Polla/centuryBet/plugins/android.json"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\Users\\Administrador\\CentenaryApp",
+			"C:\\Desk\\Polla\\centuryBet\\plugins"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"allow",
+			"set",
+			"fire",
+			"invitatt",
+			"sms",
+			"contacts[i]",
+			"ion-ios-checkmark-outline",
+			"outline",
+			"menuCtrl",
+			"pageInvitations",
+			"menuContent",
+			"{{ contact.name.formatted }}",
+			"na"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"contactResult"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "package.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 191.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

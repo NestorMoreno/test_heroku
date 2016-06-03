@@ -12,7 +12,8 @@ var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
-
+console.log('Se ha subido la aplicacion en el puerto 5000');
+console.log('http://localhost:5000/');
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
@@ -23,7 +24,7 @@ app.get('/', function(req, res) {
 app.get(['/facebook', '/instagram'], function(req, res) {
   if (
     req.param('hub.mode') == 'subscribe' &&
-    req.param('hub.verify_token') == 'token'
+    req.param('hub.verify_token') == 'EAAAAJjz1jOMBAH4OuHdaMRpX72xAOuoWZCRGTfRAi4JeI4aGXON7y6gmEjxIEjLJLFuSzGwkM8ob5WKKsMDsQehBrSnF1sBdMQE4oKrRQZCOnhg8WZCP6spRX6orSyliWJrgT7GNULpbq1TgKBW23XDZCLViaxJd1ulNdg1ykgZDZD'
   ) {
     res.send(req.param('hub.challenge'));
   } else {
