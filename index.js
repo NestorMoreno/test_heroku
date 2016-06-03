@@ -8,7 +8,7 @@
 
 var bodyParser = require('body-parser');
 var express = require('express');
-var fbsub = require("fbsub");
+// var fbsub = require("fbsub");
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -21,65 +21,65 @@ app.use(bodyParser.json());
 
 
  
-fbsub.init({
-    appId: 164231482595,
-    appSecret: 'a4292a0aae9cb62cfd507dd485d696aa',
-    verifyToken: 'tokendeprueba',              
-    callbackUrl: 'https://tiendaf.herokuapp.com/facebook',
-});
+// fbsub.init({
+//     appId: 164231482595,
+//     appSecret: 'a4292a0aae9cb62cfd507dd485d696aa',
+//     verifyToken: 'tokendeprueba',              
+//     callbackUrl: 'https://tiendaf.herokuapp.com/facebook',
+// });
 
-var object = 'user';
-var fields = ['interests','about','about_me','likes'];
+// var object = 'user';
+// var fields = ['interests','about','about_me','likes'];
 
-fbsub.authenticate(function(err) {
-    if (err == null) {
-        fbsub.subscribe(object, fields, function(err) {
-            if (err == null) {
-                // ... 
-                console.log('fbsub subscribe succeed!');
-            } else {
-                // ... 
-                console.log('fbsub subscribe failed...' + err);
-            }
-        });
-    } else {
-        // ... 
-        console.log('fbsub auth failed...');
-    }
-});
+// fbsub.authenticate(function(err) {
+//     if (err == null) {
+//         fbsub.subscribe(object, fields, function(err) {
+//             if (err == null) {
+//                 // ... 
+//                 console.log('fbsub subscribe succeed!');
+//             } else {
+//                 // ... 
+//                 console.log('fbsub subscribe failed...' + err);
+//             }
+//         });
+//     } else {
+//         // ... 
+//         console.log('fbsub auth failed...');
+//     }
+// });
 
 
 
 app.get('/', function(req, res) {
   console.log(req);
-  res.send('Funciona!');
+  res.send('Funciona!!!');
 });
 
-app.get(['/facebook', '/instagram'], function(req, res) {
-  if (
-    req.param('hub.mode') == 'subscribe' &&
-    req.param('hub.verify_token') == 'tokendeprueba'
+// app.get(['/facebook', '/instagram'], function(req, res) {
+//   if (
+//     req.param('hub.mode') == 'subscribe' &&
+//     req.param('hub.verify_token') == 'tokendeprueba'
 
-  ) {
-    res.send(req.param('hub.challenge'));
-  } else {
-    res.sendStatus(400);
-  }
-});
+//   ) {
+//     res.send(req.param('hub.challenge'));
+//   } else {
+//     res.sendStatus(400);
+//   }
+// });
 
-app.post('/facebook', function(req, res) {
-  console.log('Facebook request body:');
-  console.log(req.body);
-  // Process the Facebook updates here
-  res.sendStatus(200);
-});
+// app.post('/facebook', function(req, res) {
+//   console.log('Facebook request body:');
+//   console.log(req.body);
+//   // Process the Facebook updates here
+//   res.sendStatus(200);
+// });
 
-app.post('/instagram', function(req, res) {
-  console.log('Instagram request body:');
-  console.log(req.body);
-  // Process the Instagram updates here
-  res.sendStatus(200);
-});
+// app.post('/instagram', function(req, res) {
+//   console.log('Instagram request body:');
+//   console.log(req.body);
+//   // Process the Instagram updates here
+//   res.sendStatus(200);
+// });
 
 
 
@@ -88,7 +88,7 @@ app.get(['/webhook'], function(req, res) {
   if (req.query['hub.verify_token'] === 'falachattoken') {
     res.send(req.query['hub.challenge']);
   } else {
-    res.send('Error, wrong validation token');    
+    res.send('Error, wrong validation token!!!');    
   }
 });
 
