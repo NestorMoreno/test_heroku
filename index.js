@@ -9,7 +9,7 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-//var request = require('request');
+var request = require('request');
 // var fbsub = require("fbsub");
 var app = express();
 
