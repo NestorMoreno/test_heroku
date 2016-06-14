@@ -52,7 +52,7 @@ app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
   console.log(req);
-  res.send('Funciona!!!');
+  res.send('Funciona!');
 });
 
 // app.get(['/facebook', '/instagram'], function(req, res) {
