@@ -107,13 +107,12 @@ app.post('/webhook', function (req, res) {
             var appapi = apiai("d8ff392035b34e418df6f05f12f101b3");
             var request = appapi.textRequest(event.message.text);
             request.on('response', function(response) {
-                //console.log('respuesta bot:' + response);
-                sendMessage(event.sender.id, {text: 'respuesta bot:' + response['result']['fulfillment']['speech']});
+                sendMessage(event.sender.id, {text: response['result']['fulfillment']['speech']});
             });
 
             request.on('error', function(error) {
                 console.log(error);
-                sendMessage(event.sender.id, {text: 'Se presentó error.'+error});
+                sendMessage(event.sender.id, {text: 'Se presentó error: ' + error});
             });
             request.end()
             
