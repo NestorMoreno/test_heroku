@@ -108,7 +108,7 @@ app.post('/webhook', function (req, res) {
             var request = appapi.textRequest(event.message.text);
             request.on('response', function(response) {
                 //console.log('respuesta bot:' + response);
-                sendMessage(event.sender.id, {text: 'respuesta bot:' + response['result']['resolvedQuery']});
+                sendMessage(event.sender.id, {text: 'respuesta bot:' + response['result']['resolvedQuery']['fulfillment']['speech']});
             });
 
             request.on('error', function(error) {
