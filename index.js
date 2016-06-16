@@ -108,18 +108,18 @@ app.post('/webhook', function (req, res) {
             sendMessage(event.sender.id, {text: 'respuesta heroku:' + event.message.text});
 
 
-            //var app = apiai("d8ff392035b34e418df6f05f12f101b3");
-            //var request = app.textRequest(event.message.text);
-            //request.on('response', function(response) {
-            //    console.log('respuesta bot:' + response);
-            //    sendMessage(event.sender.id, {text: 'respuesta bot:' + response});
-            //});
+            var appapi = apiai("d8ff392035b34e418df6f05f12f101b3");
+            var request = appapi.textRequest(event.message.text);
+            request.on('response', function(response) {
+                console.log('respuesta bot:' + response);
+                sendMessage(event.sender.id, {text: 'respuesta bot:' + response});
+            });
 
-            //request.on('error', function(error) {
-            //    console.log(error);
-            //    sendMessage(event.sender.id, {text: 'Se presentó error.'+error});
-            //});
-            //request.end()
+            request.on('error', function(error) {
+                console.log(error);
+                sendMessage(event.sender.id, {text: 'Se presentó error.'+error});
+            });
+            request.end()
             
           }else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
