@@ -82,10 +82,6 @@ app.get('/', function(req, res) {
 // });
 
 
-//api.ai
-
-var app = apiai("d8ff392035b34e418df6f05f12f101b3");
-
 
 // Facebook Webhook
 app.get(['/webhook'], function(req, res) {
@@ -107,6 +103,9 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
           if (!kittenMessage(event.sender.id, event.message.text)) {
+            //api.ai
+            var app = apiai("d8ff392035b34e418df6f05f12f101b3");
+            
             var request = app.textRequest(event.message.text);
             request.on('response', function(response) {
                 console.log(response);
