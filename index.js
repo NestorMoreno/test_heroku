@@ -104,15 +104,11 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
           if (!kittenMessage(event.sender.id, event.message.text)) {
             
-
-            sendMessage(event.sender.id, {text: 'respuesta heroku:' + event.message.text});
-
-
             var appapi = apiai("d8ff392035b34e418df6f05f12f101b3");
             var request = appapi.textRequest(event.message.text);
             request.on('response', function(response) {
-                console.log('respuesta bot:' + response);
-                sendMessage(event.sender.id, {text: 'respuesta bot:' + response});
+                //console.log('respuesta bot:' + response);
+                sendMessage(event.sender.id, {text: 'respuesta bot:' + response['result']['resolvedQuery']});
             });
 
             request.on('error', function(error) {
