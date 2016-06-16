@@ -10,7 +10,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
-// var fbsub = require("fbsub");
+var apiai = require('apiai');
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -19,10 +19,6 @@ app.use(bodyParser.json());
 app.listen(app.get('port'));
 console.log('Se ha subido la aplicacion en el puerto 5000');
 console.log('http://localhost:5000/');
-//app.use(bodyParser.json());
-
-
-
 
  
 // fbsub.init({
@@ -86,6 +82,10 @@ app.get('/', function(req, res) {
 // });
 
 
+//api.ai
+
+var app = apiai("d8ff392035b34e418df6f05f12f101b3");
+
 
 // Facebook Webhook
 app.get(['/webhook'], function(req, res) {
@@ -107,7 +107,18 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
           if (!kittenMessage(event.sender.id, event.message.text)) {
-            sendMessage(event.sender.id, {text: "Mensaje de respuesta del bot para: " + event.message.text});
+            var request = app.textRequest(event.message.text);
+            request.on('response', function(response) {
+                console.log(response);
+                sendMessage(event.sender.id, {text: response});
+            });
+
+            request.on('error', function(error) {
+                console.log(error);
+                sendMessage(event.sender.id, {text: 'Se presentó error.'+error});
+            });
+            request.end()
+            
           }else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
           }
