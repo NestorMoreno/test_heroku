@@ -162,16 +162,16 @@ function kittenMessage(recipientId, text) {
                     "payload": {
                         "template_type": "generic",
                         "elements": [{
-                            "title": "Kitten",
-                            "subtitle": "Cute kitten picture",
+                            "title": "Título principal",
+                            "subtitle": "Texto de prueba para el mensaje, este es un texto de prueba para el mensaje.",
                             "image_url": imageUrl ,
                             "buttons": [{
                                 "type": "web_url",
                                 "url": imageUrl,
-                                "title": "Show kitten"
+                                "title": "Mostrar imagen"
                                 }, {
                                 "type": "postback",
-                                "title": "I like this",
+                                "title": "Botón de acción",
                                 "payload": "User " + recipientId + " likes kitten " + imageUrl,
                             }]
                         }]
