@@ -14,7 +14,8 @@ var apiai = require('apiai');
 var app = express();
 
 var pg = require('pg');
-pg.defaults.ssl = true;
+
+
 
 app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -23,17 +24,36 @@ app.listen(app.get('port'));
 console.log('Se ha subido la aplicacion en el puerto 5000');
 console.log('http://localhost:5000/');
 
-var connectionString = process.env.DATABASE_URL || ' postgres://aqqqwndvanofqy:okOt8byPmeWttNtfKYY6AB6ihB@ec2-54-235-240-76.compute-1.amazonaws.com:5432/dach7eo5s7la18';
+//var connectionString = process.env.DATABASE_URL || 'postgres://aqqqwndvanofqy:okOt8byPmeWttNtfKYY6AB6ihB@ec2-54-235-240-76.compute-1.amazonaws.com:5432/dach7eo5s7la18';
+var connectionString = 'postgres://aqqqwndvanofqy:okOt8byPmeWttNtfKYY6AB6ihB@ec2-54-235-240-76.compute-1.amazonaws.com:5432/dach7eo5s7la18';
+console.log('Ruta:' + connectionString);
 
-pg.connect(process.env.DATABASE_URL, function(err, client) {
-  if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
+var client = new pg.Client(conString);
+client.connect(function(err) {
+  if(err) {
+    return console.error('could not connect to postgres', err);
+  }
+  client.query('SELECT NOW() AS "theTime"', function(err, result) {
+    if(err) {
+      return console.error('error running query', err);
+    }
+    console.log(result.rows[0].theTime);
+    //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
+    client.end();
+  });
+});
 
-  client
-    .query('SELECT "Id", "Message", "CustomerMobile", "ChatType", "Date", "IdState", "CustomerName", "IdAttached" FROM public.incoming;')
-    .on('row', function(row) {
-      console.log(JSON.stringify(row));
-    });
+
+
+//pg.connect(process.env.DATABASE_URL, function(err, client) {
+//  if (err) throw err;
+//  console.log('Connected to postgres! Getting schemas...');
+
+//  client
+//    .query('SELECT "Id", "Message", "CustomerMobile", "ChatType", "Date", "IdState", "CustomerName", "IdAttached" FROM public.incoming;')
+//    .on('row', function(row) {
+//      console.log(JSON.stringify(row));
+//    });
 });
 
 
