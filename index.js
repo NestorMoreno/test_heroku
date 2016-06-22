@@ -13,6 +13,9 @@ var request = require('request');
 var apiai = require('apiai');
 var app = express();
 
+var pg = require('pg');
+pg.defaults.ssl = true;
+
 app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -20,7 +23,28 @@ app.listen(app.get('port'));
 console.log('Se ha subido la aplicacion en el puerto 5000');
 console.log('http://localhost:5000/');
 
- 
+var connectionString = process.env.DATABASE_URL || ' postgres://aqqqwndvanofqy:okOt8byPmeWttNtfKYY6AB6ihB@ec2-54-235-240-76.compute-1.amazonaws.com:5432/dach7eo5s7la18';
+
+pg.connect(process.env.DATABASE_URL, function(err, client) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
+
+  client
+    .query('SELECT "Id", "Message", "CustomerMobile", "ChatType", "Date", "IdState", "CustomerName", "IdAttached" FROM public.incoming;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
+    });
+});
+
+
+//SELECT "Id", "Message", "CustomerMobile", "ChatType", "Date", "IdState", "CustomerName", "IdAttached" FROM public.incoming;
+
+//var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/todo';
+//var client = new pg.Client(connectionString);
+//client.connect();
+//var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, text VARCHAR(40) not null, complete BOOLEAN)');
+//query.on('end', function() { client.end(); });
+
 // fbsub.init({
 //     appId: 164231482595,
 //     appSecret: 'a4292a0aae9cb62cfd507dd485d696aa',
@@ -103,19 +127,20 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
           if (!kittenMessage(event.sender.id, event.message.text)) {
-            
+
+
             var appapi = apiai("d8ff392035b34e418df6f05f12f101b3");
             var request = appapi.textRequest(event.message.text);
             request.on('response', function(response) {
                 sendMessage(event.sender.id, {text: response['result']['fulfillment']['speech']});
             });
-
             request.on('error', function(error) {
                 console.log(error);
                 sendMessage(event.sender.id, {text: 'Se presentó error: ' + error});
             });
             request.end()
-            
+
+
           }else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
           }

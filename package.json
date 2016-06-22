@@ -4,9 +4,6 @@
   "description": "descripcion",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "scripts": {
     "start": "node index.js"
   },
   "repository": {
@@ -18,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/NestorMoreno/test_heroku/issues"
   },
-  "homepage": "https://github.com/NestorMoreno/test_heroku#readme"
+  "homepage": "https://github.com/NestorMoreno/test_heroku#readme",
+  "dependencies": {
+    "pg": "5.2.0"
+  }
 }
