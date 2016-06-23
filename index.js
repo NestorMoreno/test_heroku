@@ -33,26 +33,54 @@ var client = new pg.Client({
     ssl: true
 }); 
 
-//client.connect(function(err) {
-//  if(err) {
-//    return console.error('could not connect to postgres', err);
-//  }
-//  var query = 'SELECT "Id","Message","CustomerMobile","ChatType","Date","IdState","CustomerName","IdAttached" FROM public.incoming;';
-//  client.query(query, function(err, result) {
-//    if(err) {
-//      return console.error('Se presentó error en la ejecución del query.', err);
-//    } 
-//    console.log(result.rows[0].Message);
-//    client.end();
-//  });
-//});
+client.connect(function(err) {
+  if(err) {
+    return console.error('could not connect to postgres', err);
+  }
+  var query = 'SELECT "Id","Message","CustomerMobile","ChatType","Date","IdState","CustomerName","IdAttached" FROM public.incoming;';
+  client.query(query, function(err, result) {
+    if(err) {
+      return console.error('error running query', err);
+    }
+    console.log(result.rows[0].Message);
+    client.end();
+  });
+});
 
 
 // Server frontpage
 app.get('/', function(req, res) {
   console.log(req);
-  res.send('Webhook de prueba. ¡Funciona!');
+  res.send('Webhook de prueba. Funciona!');
 });
+
+// app.get(['/facebook', '/instagram'], function(req, res) {
+//   if (
+//     req.param('hub.mode') == 'subscribe' &&
+//     req.param('hub.verify_token') == 'tokendeprueba'
+
+//   ) {
+//     res.send(req.param('hub.challenge'));
+//   } else {
+//     res.sendStatus(400);
+//   }
+// });
+
+// app.post('/facebook', function(req, res) {
+//   console.log('Facebook request body:');
+//   console.log(req.body);
+//   // Process the Facebook updates here
+//   res.sendStatus(200);
+// });
+
+// app.post('/instagram', function(req, res) {
+//   console.log('Instagram request body:');
+//   console.log(req.body);
+//   // Process the Instagram updates here
+//   res.sendStatus(200);
+// });
+
+
 
 // Facebook Webhook
 app.get(['/webhook'], function(req, res) {
@@ -80,9 +108,6 @@ app.post('/webhook', function (req, res) {
             var request = appapi.textRequest(event.message.text);
             request.on('response', function(response) {
                 sendMessage(event.sender.id, {text: response['result']['fulfillment']['speech']});
-                console.log('Se fue a insertar. ');
-                //insertData();
-                console.log('Terminó de insertar. ');
             });
             request.on('error', function(error) {
                 console.log(error);
@@ -163,18 +188,5 @@ function kittenMessage(recipientId, text) {
     return false;
     
 };
-
-function insertData(){
-  // SQL Query > Insert Data
-  client.query('INSERT INTO public.incoming("Message","CustomerMobile","ChatType","Date","IdState","CustomerName") ' + 
-    'values("Mensaje3", "123456789", "2", "06-23-2016", "0","CustomerName")');
-   client.query(query, function(err, result) {
-    if(err) {
-      return console.error('Se presentó error en la inserción.', err);
-    }
-    console.log('Insertó!!!');
-    client.end();
-  });
-}
 
 app.listen();
