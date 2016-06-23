@@ -33,19 +33,19 @@ var client = new pg.Client({
     ssl: true
 }); 
 
-client.connect(function(err) {
-  if(err) {
-    return console.error('could not connect to postgres', err);
-  }
-  var query = 'SELECT "Id","Message","CustomerMobile","ChatType","Date","IdState","CustomerName","IdAttached" FROM public.incoming;';
-  client.query(query, function(err, result) {
-    if(err) {
-      return console.error('Se presentó error en la ejecución del query.', err);
-    } 
-    console.log(result.rows[0].Message);
-    client.end();
-  });
-});
+//client.connect(function(err) {
+//  if(err) {
+//    return console.error('could not connect to postgres', err);
+//  }
+//  var query = 'SELECT "Id","Message","CustomerMobile","ChatType","Date","IdState","CustomerName","IdAttached" FROM public.incoming;';
+//  client.query(query, function(err, result) {
+//    if(err) {
+//      return console.error('Se presentó error en la ejecución del query.', err);
+//    } 
+//    console.log(result.rows[0].Message);
+//    client.end();
+//  });
+//});
 
 
 // Server frontpage
