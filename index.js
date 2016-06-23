@@ -24,108 +24,35 @@ app.listen(app.get('port'));
 console.log('Se ha subido la aplicacion en el puerto 5000');
 console.log('http://localhost:5000/');
 
-//var connectionString = process.env.DATABASE_URL || 'postgres://aqqqwndvanofqy:okOt8byPmeWttNtfKYY6AB6ihB@ec2-54-235-240-76.compute-1.amazonaws.com:5432/dach7eo5s7la18';
-var connectionString = 'postgres://aqqqwndvanofqy:okOt8byPmeWttNtfKYY6AB6ihB@ec2-54-235-240-76.compute-1.amazonaws.com:5432/dach7eo5s7la18';
-console.log('Ruta:' + connectionString);
+var client = new pg.Client({
+    user: "aqqqwndvanofqy",
+    password: "okOt8byPmeWttNtfKYY6AB6ihB",
+    database: "dach7eo5s7la18",
+    port: 5432,
+    host: "ec2-54-235-240-76.compute-1.amazonaws.com",
+    ssl: true
+}); 
 
-var client = new pg.Client(conString);
 client.connect(function(err) {
   if(err) {
     return console.error('could not connect to postgres', err);
   }
-  client.query('SELECT NOW() AS "theTime"', function(err, result) {
+  var query = 'SELECT "Id","Message","CustomerMobile","ChatType","Date","IdState","CustomerName","IdAttached" FROM public.incoming;';
+  client.query(query, function(err, result) {
     if(err) {
-      return console.error('error running query', err);
+      return console.error('Se presentó error en la ejecución del query.', err);
     }
-    console.log(result.rows[0].theTime);
-    //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
+    console.log(result.rows[0].Message);
     client.end();
   });
 });
 
 
-
-//pg.connect(process.env.DATABASE_URL, function(err, client) {
-//  if (err) throw err;
-//  console.log('Connected to postgres! Getting schemas...');
-
-//  client
-//    .query('SELECT "Id", "Message", "CustomerMobile", "ChatType", "Date", "IdState", "CustomerName", "IdAttached" FROM public.incoming;')
-//    .on('row', function(row) {
-//      console.log(JSON.stringify(row));
-//    });
-});
-
-
-//SELECT "Id", "Message", "CustomerMobile", "ChatType", "Date", "IdState", "CustomerName", "IdAttached" FROM public.incoming;
-
-//var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/todo';
-//var client = new pg.Client(connectionString);
-//client.connect();
-//var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, text VARCHAR(40) not null, complete BOOLEAN)');
-//query.on('end', function() { client.end(); });
-
-// fbsub.init({
-//     appId: 164231482595,
-//     appSecret: 'a4292a0aae9cb62cfd507dd485d696aa',
-//     verifyToken: 'tokendeprueba',              
-//     callbackUrl: 'https://tiendaf.herokuapp.com/facebook',
-// });
-
-// var object = 'user';
-// var fields = ['interests','about','about_me','likes'];
-
-// fbsub.authenticate(function(err) {
-//     if (err == null) {
-//         fbsub.subscribe(object, fields, function(err) {
-//             if (err == null) {
-//                 // ... 
-//                 console.log('fbsub subscribe succeed!');
-//             } else {
-//                 // ... 
-//                 console.log('fbsub subscribe failed...' + err);
-//             }
-//         });
-//     } else {
-//         // ... 
-//         console.log('fbsub auth failed...');
-//     }
-// });
-
-
 // Server frontpage
 app.get('/', function(req, res) {
   console.log(req);
-  res.send('Webhook de prueba.');
+  res.send('Webhook de prueba. ¡Funciona!');
 });
-
-// app.get(['/facebook', '/instagram'], function(req, res) {
-//   if (
-//     req.param('hub.mode') == 'subscribe' &&
-//     req.param('hub.verify_token') == 'tokendeprueba'
-
-//   ) {
-//     res.send(req.param('hub.challenge'));
-//   } else {
-//     res.sendStatus(400);
-//   }
-// });
-
-// app.post('/facebook', function(req, res) {
-//   console.log('Facebook request body:');
-//   console.log(req.body);
-//   // Process the Facebook updates here
-//   res.sendStatus(200);
-// });
-
-// app.post('/instagram', function(req, res) {
-//   console.log('Instagram request body:');
-//   console.log(req.body);
-//   // Process the Instagram updates here
-//   res.sendStatus(200);
-// });
-
-
 
 // Facebook Webhook
 app.get(['/webhook'], function(req, res) {
@@ -153,6 +80,9 @@ app.post('/webhook', function (req, res) {
             var request = appapi.textRequest(event.message.text);
             request.on('response', function(response) {
                 sendMessage(event.sender.id, {text: response['result']['fulfillment']['speech']});
+                console.log('Se fue a insertar. ');
+                insertData();
+                console.log('Terminó de insertar. ');
             });
             request.on('error', function(error) {
                 console.log(error);
@@ -233,5 +163,18 @@ function kittenMessage(recipientId, text) {
     return false;
     
 };
+
+function insertData(){
+  // SQL Query > Insert Data
+  client.query('INSERT INTO public.incoming("Message","CustomerMobile","ChatType","Date","IdState","CustomerName") ' + 
+    'values("Mensaje3", "123456789", "2", "06-23-2016", "0","CustomerName")');
+   client.query(query, function(err, result) {
+    if(err) {
+      return console.error('Se presentó error en la inserción.', err);
+    }
+    console.log('Insertó!!!');
+    client.end();
+  });
+}
 
 app.listen();
