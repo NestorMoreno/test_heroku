@@ -81,7 +81,7 @@ app.post('/webhook', function (req, res) {
             request.on('response', function(response) {
                 sendMessage(event.sender.id, {text: response['result']['fulfillment']['speech']});
                 console.log('Se fue a insertar. ');
-                insertData();
+                //insertData();
                 console.log('Terminó de insertar. ');
             });
             request.on('error', function(error) {
