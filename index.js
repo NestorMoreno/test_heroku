@@ -41,7 +41,7 @@ client.connect(function(err) {
   client.query(query, function(err, result) {
     if(err) {
       return console.error('Se presentó error en la ejecución del query.', err);
-    }
+    } 
     console.log(result.rows[0].Message);
     client.end();
   });
