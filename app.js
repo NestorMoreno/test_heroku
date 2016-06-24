@@ -13,7 +13,7 @@ var request = require('request');
 var apiai = require('apiai');
 var app = express();
 
-//var pg = require('pg');
+var pg = require('pg');
 
 
 
@@ -51,7 +51,7 @@ console.log('http://localhost:5000/');
 // Server frontpage
 app.get('/', function(req, res) {
   console.log(req);
-  res.send('Webhook de prueba. ¡Funciona!');
+  res.send('Webhook de prueba!');
 });
 
 // Facebook Webhook
