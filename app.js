@@ -162,7 +162,16 @@ function kittenMessage(recipientId, text) {
 
 function insertData(){    
 
-    console.log('1 insertar');
+    var client = new pg.Client({
+        user: "aqqqwndvanofqy",
+        password: "okOt8byPmeWttNtfKYY6AB6ihB",
+        database: "dach7eo5s7la18",
+        port: 5432,
+        host: "ec2-54-235-240-76.compute-1.amazonaws.com",
+        ssl: true
+    }); 
+    console.log('1 insertar.');
+
     client.connect(function(err) {
     if(err) {
         return console.error('could not connect to postgres2', err);
