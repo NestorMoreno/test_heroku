@@ -47,7 +47,7 @@ client.connect(function(err) {
 // Server frontpage
 app.get('/', function(req, res) {
   console.log(req);
-  res.send('Webhook de prueba...');
+  res.send('Este es un Webhook de prueba.');
 });
 
 // Facebook Webhook
