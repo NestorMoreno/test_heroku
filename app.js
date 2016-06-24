@@ -24,7 +24,7 @@ console.log('http://localhost:5000/');
 // Server frontpage
 app.get('/', function(req, res) {
   console.log(req);
-  res.send('Este es un Webhook!!!');
+  res.send('Este es un Webhook');
 });
 
 // Facebook Webhook
