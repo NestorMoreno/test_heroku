@@ -24,7 +24,7 @@ console.log('http://localhost:5000/');
 // Server frontpage
 app.get('/', function(req, res) {
   console.log(req);
-  res.send('Este es un Webhook');
+  res.send('Este es un Webhook!');
 });
 
 // Facebook Webhook
@@ -155,7 +155,7 @@ function insertData(customerId, message, time){
         return console.log('could not connect to postgres2', err);
     }
     
-    var query = "INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"Date\",\"IdState\",\"CustomerName\") values(message, '123456789', '2', '06-23-2016', '0','CustomerName')";
+    var query = "INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"Date\",\"IdState\",\"CustomerName\") values( " + message + ", '123456789', '2', '06-23-2016', '0','CustomerName')";
     console.log('2 insertar');
     client.query(query, function(err, result) {
         if(err) {
