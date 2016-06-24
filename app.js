@@ -58,7 +58,7 @@ app.post('/webhook', function (req, res) {
                 sendMessage(event.sender.id, {text: txtMsg });
                
                 // DataBase
-                insertData(event.sender.id, txtMsg, time);
+                insertData(event.sender.id, event.message.text, time);
             });
             request.on('error', function(error) {
                 console.log(error);
