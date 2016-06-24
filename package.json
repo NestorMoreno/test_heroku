@@ -2,9 +2,9 @@
   "name": "test_heroku",
   "version": "1.0.0",
   "description": "descripcion",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/NestorMoreno/test_heroku#readme",
   "dependencies": {
-    "pg": "5.2.0"
+    
   }
 }
