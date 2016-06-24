@@ -161,7 +161,7 @@ function insertData(customerId, message, time){
         if(err) {
             return console.log('Se presentó error en la ejecución del query2.', err);
         } 
-        console.log('Inserción Ok');
+        console.log('Inserción Ok.');
         client.end();
     });
 });
