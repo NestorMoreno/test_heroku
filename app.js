@@ -176,8 +176,8 @@ function insertData(){
     if(err) {
         return console.error('could not connect to postgres2', err);
     }
-    var query = 'INSERT INTO public.incoming("Message","CustomerMobile","ChatType","Date","IdState","CustomerName") ' + 
-    'values("Mensaje3", "123456789", "2", "06-23-2016", "0","CustomerName")';
+    console.log('1.2 insertar');
+    var query = 'INSERT INTO public.incoming("Message","CustomerMobile","ChatType","Date","IdState","CustomerName") values("Mensaje3", "123456789", "2", "06-23-2016", "0","CustomerName")';
     console.log('2 insertar');
     client.query(query, function(err, result) {
         if(err) {
