@@ -164,17 +164,17 @@ function kittenMessage(recipientId, text) {
     
 };
 
-function insertData(){
-  // SQL Query > Insert Data
-  client.query('INSERT INTO public.incoming("Message","CustomerMobile","ChatType","Date","IdState","CustomerName") ' + 
-    'values("Mensaje3", "123456789", "2", "06-23-2016", "0","CustomerName")');
-   client.query(query, function(err, result) {
-    if(err) {
-      return console.error('Se presentó error en la inserción.', err);
-    }
-    console.log('Insertó!!!');
-    client.end();
-  });
-}
+//function insertData(){
+//  // SQL Query > Insert Data
+//  client.query('INSERT INTO public.incoming("Message","CustomerMobile","ChatType","Date","IdState","CustomerName") ' + 
+//   'values("Mensaje3", "123456789", "2", "06-23-2016", "0","CustomerName")');
+//   client.query(query, function(err, result) {
+//    if(err) {
+//      return console.error('Se presentó error en la inserción.', err);
+//    }
+//    console.log('Insertó!!!');
+//    client.end();
+//  });
+//}
 
 app.listen();
