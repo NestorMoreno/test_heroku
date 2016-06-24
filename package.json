@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/NestorMoreno/test_heroku#readme",
   "dependencies": {
-    
+    "pg": "5.2.0"
   }
 }

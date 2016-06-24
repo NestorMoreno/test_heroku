@@ -13,7 +13,7 @@ var request = require('request');
 var apiai = require('apiai');
 var app = express();
 
-var pg = require('pg');
+//var pg = require('pg');
 
 
 
@@ -24,14 +24,14 @@ app.listen(app.get('port'));
 console.log('Se ha subido la aplicacion en el puerto 5000');
 console.log('http://localhost:5000/');
 
-var client = new pg.Client({
-    user: "aqqqwndvanofqy",
-    password: "okOt8byPmeWttNtfKYY6AB6ihB",
-    database: "dach7eo5s7la18",
-    port: 5432,
-    host: "ec2-54-235-240-76.compute-1.amazonaws.com",
-    ssl: true
-}); 
+//var client = new pg.Client({
+//    user: "aqqqwndvanofqy",
+//    password: "okOt8byPmeWttNtfKYY6AB6ihB",
+//    database: "dach7eo5s7la18",
+//    port: 5432,
+//    host: "ec2-54-235-240-76.compute-1.amazonaws.com",
+//    ssl: true
+//}); 
 
 //client.connect(function(err) {
 //  if(err) {
