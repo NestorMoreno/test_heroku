@@ -155,7 +155,7 @@ function insertData(customerId, message, time){
         return console.log('could not connect to postgres2', err);
     }
     
-    var query = "INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"Date\",\"IdState\",\"CustomerName\") values( " + message + ", '123456789', '2', '06-23-2016', '0','CustomerName')";
+    var query = "INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"Date\",\"IdState\",\"CustomerName\") values( '" + message + "', '123456789', '2', '06-23-2016', '0','CustomerName')";
     console.log('2 insertar');
     client.query(query, function(err, result) {
         if(err) {
