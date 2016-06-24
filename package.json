@@ -2,9 +2,9 @@
   "name": "test_heroku",
   "version": "1.0.0",
   "description": "descripcion",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
