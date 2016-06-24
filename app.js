@@ -20,29 +20,6 @@ app.listen(app.get('port'));
 console.log('Se ha subido la aplicacion en el puerto 5000');
 console.log('http://localhost:5000/');
 
-var client = new pg.Client({
-    user: "aqqqwndvanofqy",
-    password: "okOt8byPmeWttNtfKYY6AB6ihB",
-    database: "dach7eo5s7la18",
-    port: 5432,
-    host: "ec2-54-235-240-76.compute-1.amazonaws.com",
-    ssl: true
-}); 
-
-client.connect(function(err) {
-  if(err) {
-    return console.error('could not connect to postgres', err);
-  }
-  var query = 'SELECT "Id","Message","CustomerMobile","ChatType","Date","IdState","CustomerName","IdAttached" FROM public.incoming;';
-  client.query(query, function(err, result) {
-    if(err) {
-      return console.error('Se presentó error en la ejecución del query.', err);
-    } 
-    console.log(result.rows[0].Message);
-    client.end();
-  });
-});
-
 
 // Server frontpage
 app.get('/', function(req, res) {
@@ -72,13 +49,16 @@ app.post('/webhook', function (req, res) {
           if (!kittenMessage(event.sender.id, event.message.text)) {
 
 
+            var time = event.timestamp;
+
             var appapi = apiai("d8ff392035b34e418df6f05f12f101b3");
             var request = appapi.textRequest(event.message.text);
             request.on('response', function(response) {
-                sendMessage(event.sender.id, {text: response['result']['fulfillment']['speech']});
-                console.log('Se fue a insertar. ');
-                insertData();
-                console.log('Terminó de insertar. ');
+                var txtMsg = response['result']['fulfillment']['speech'];
+                sendMessage(event.sender.id, {text: txtMsg });
+               
+                // DataBase
+                insertData(event.sender.id, txtMsg, time);
             });
             request.on('error', function(error) {
                 console.log(error);
@@ -160,16 +140,22 @@ function kittenMessage(recipientId, text) {
     
 };
 
-function insertData(){    
-
-    
+function insertData(customerId, message, time){    
+    var client = new pg.Client({
+        user: "aqqqwndvanofqy",
+        password: "okOt8byPmeWttNtfKYY6AB6ihB",
+        database: "dach7eo5s7la18",
+        port: 5432,
+        host: "ec2-54-235-240-76.compute-1.amazonaws.com",
+        ssl: true
+    }); 
 
     client.connect(function(err) {
     if(err) {
         return console.log('could not connect to postgres2', err);
     }
     
-    var query = "INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"Date\",\"IdState\",\"CustomerName\") values('Mensaje3', '123456789', '2', '06-23-2016', '0','CustomerName')";
+    var query = "INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"Date\",\"IdState\",\"CustomerName\") values(message, '123456789', '2', '06-23-2016', '0','CustomerName')";
     console.log('2 insertar');
     client.query(query, function(err, result) {
         if(err) {
@@ -182,17 +168,20 @@ function insertData(){
 
 
 
-  // SQL Query > Insert Data
-  //client.query('INSERT INTO public.incoming("Message","CustomerMobile","ChatType","Date","IdState","CustomerName") ' + 
-  // 'values("Mensaje3", "123456789", "2", "06-23-2016", "0","CustomerName")');
-   //client.query(query, function(err, result) {
-   // if(err) {
-   //   return console.error('Se presentó error en la inserción.', err);
-   // }
-   // console.log('Insertó!!!');
-    //client.end();
-  //});
-
+// client.connect(function(err) {
+//   if(err) {
+//     return console.error('could not connect to postgres', err);
+//   }
+//   var query = 'SELECT "Id","Message","CustomerMobile","ChatType","Date","IdState","CustomerName","IdAttached" FROM public.incoming;';
+//   client.query(query, function(err, result) {
+//     if(err) {
+//       return console.error('Se presentó error en la ejecución del query.', err);
+//     } 
+//     console.log(result.rows[0].Message);
+//     client.end();
+//   });
+// });
+ 
 
 
 }
