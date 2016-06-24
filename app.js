@@ -47,7 +47,7 @@ client.connect(function(err) {
 // Server frontpage
 app.get('/', function(req, res) {
   console.log(req);
-  res.send('Este es un Webhook.');
+  res.send('Este es un Webhook!!!');
 });
 
 // Facebook Webhook
@@ -77,7 +77,7 @@ app.post('/webhook', function (req, res) {
             request.on('response', function(response) {
                 sendMessage(event.sender.id, {text: response['result']['fulfillment']['speech']});
                 console.log('Se fue a insertar. ');
-                //insertData();
+                insertData();
                 console.log('Terminó de insertar. ');
             });
             request.on('error', function(error) {
@@ -160,17 +160,38 @@ function kittenMessage(recipientId, text) {
     
 };
 
-function insertData(){
-  // SQL Query > Insert Data
-  client.query('INSERT INTO public.incoming("Message","CustomerMobile","ChatType","Date","IdState","CustomerName") ' + 
-   'values("Mensaje3", "123456789", "2", "06-23-2016", "0","CustomerName")');
-   client.query(query, function(err, result) {
+function insertData(){    
+
+    client.connect(function(err) {
     if(err) {
-      return console.error('Se presentó error en la inserción.', err);
+        return console.error('could not connect to postgres2', err);
     }
-    console.log('Insertó!!!');
-    client.end();
-  });
+    var query = 'INSERT INTO public.incoming("Message","CustomerMobile","ChatType","Date","IdState","CustomerName") ' + 
+    'values("Mensaje3", "123456789", "2", "06-23-2016", "0","CustomerName")';
+    client.query(query, function(err, result) {
+        if(err) {
+            return console.error('Se presentó error en la ejecución del query2.', err);
+        } 
+        console.log('ok');
+        client.end();
+    });
+});
+
+
+
+  // SQL Query > Insert Data
+  //client.query('INSERT INTO public.incoming("Message","CustomerMobile","ChatType","Date","IdState","CustomerName") ' + 
+  // 'values("Mensaje3", "123456789", "2", "06-23-2016", "0","CustomerName")');
+   //client.query(query, function(err, result) {
+   // if(err) {
+   //   return console.error('Se presentó error en la inserción.', err);
+   // }
+   // console.log('Insertó!!!');
+    //client.end();
+  //});
+
+
+
 }
 
 app.listen();
