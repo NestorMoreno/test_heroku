@@ -157,7 +157,7 @@ function insertData(customerId, message, time){
     
     
     client.query("INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"Date\",\"IdState\",\"CustomerName\") values($1,$2,$3,$4,$5,$6)",
-        [message,'123',customerId,'06-23-2016','0','Cli1'], function(err, result) {
+        [message,customerId,'1','06-23-2016','0','Cli1'], function(err, result) {
         if(err) {
             return console.log('Se presentó error en la ejecución del query2.', err);
         } 
