@@ -47,7 +47,7 @@ client.connect(function(err) {
 // Server frontpage
 app.get('/', function(req, res) {
   console.log(req);
-  res.send('Este es un Webhook de prueba.');
+  res.send('Este es un Webhook.');
 });
 
 // Facebook Webhook
@@ -77,7 +77,7 @@ app.post('/webhook', function (req, res) {
             request.on('response', function(response) {
                 sendMessage(event.sender.id, {text: response['result']['fulfillment']['speech']});
                 console.log('Se fue a insertar. ');
-                insertData();
+                //insertData();
                 console.log('Terminó de insertar. ');
             });
             request.on('error', function(error) {
