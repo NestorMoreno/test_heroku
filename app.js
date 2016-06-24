@@ -155,12 +155,9 @@ function insertData(customerId, message, time){
         return console.log('could not connect to postgres2', err);
     }
     
-    //client.query("INSERT INTO items(text, complete) values($1, $2)", [data.text, data.complete]);
-
-    //var query = "INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"Date\",\"IdState\",\"CustomerName\") values( '" + message + "', '123456789', '2', '06-23-2016', '0','CustomerName')";
-
-    //var query = "INSERT INTO public.incoming (Message,CustomerMobile,ChatType,Date,IdState,CustomerName) values($1,$2,$3,$4,$5.$6)",[message,'123',1,'06-23-2016',0,'Cli1'];
-    client.query("INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"Date\",\"IdState\",\"CustomerName\") values($1,$2,$3,$4,$5,$6)",[message,'123','1','06-23-2016','0','Cli1'], function(err, result) {
+    
+    client.query("INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"Date\",\"IdState\",\"CustomerName\") values($1,$2,$3,$4,$5,$6)",
+        [message,'123','1',time,'0','Cli1'], function(err, result) {
         if(err) {
             return console.log('Se presentó error en la ejecución del query2.', err);
         } 
