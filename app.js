@@ -174,14 +174,14 @@ function insertData(){
 
     client.connect(function(err) {
     if(err) {
-        return console.error('could not connect to postgres2', err);
+        return console.log('could not connect to postgres2', err);
     }
     console.log('1.2 insertar');
     var query = 'INSERT INTO public.incoming("Message","CustomerMobile","ChatType","Date","IdState","CustomerName") values("Mensaje3", "123456789", "2", "06-23-2016", "0","CustomerName")';
     console.log('2 insertar');
     client.query(query, function(err, result) {
         if(err) {
-            return console.error('Se presentó error en la ejecución del query2.', err);
+            return console.log('Se presentó error en la ejecución del query2.', err);
         } 
         console.log('ok');
         client.end();
