@@ -6,16 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var apiai = require('apiai');
 var app = express();
-
 var pg = require('pg');
-
-
 
 app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -24,28 +20,28 @@ app.listen(app.get('port'));
 console.log('Se ha subido la aplicacion en el puerto 5000');
 console.log('http://localhost:5000/');
 
-//var client = new pg.Client({
-//    user: "aqqqwndvanofqy",
-//    password: "okOt8byPmeWttNtfKYY6AB6ihB",
-//    database: "dach7eo5s7la18",
-//    port: 5432,
-//    host: "ec2-54-235-240-76.compute-1.amazonaws.com",
-//    ssl: true
-//}); 
+var client = new pg.Client({
+    user: "aqqqwndvanofqy",
+    password: "okOt8byPmeWttNtfKYY6AB6ihB",
+    database: "dach7eo5s7la18",
+    port: 5432,
+    host: "ec2-54-235-240-76.compute-1.amazonaws.com",
+    ssl: true
+}); 
 
-//client.connect(function(err) {
-//  if(err) {
-//    return console.error('could not connect to postgres', err);
-//  }
-//  var query = 'SELECT "Id","Message","CustomerMobile","ChatType","Date","IdState","CustomerName","IdAttached" FROM public.incoming;';
-//  client.query(query, function(err, result) {
-//    if(err) {
-//      return console.error('Se presentó error en la ejecución del query.', err);
-//    } 
-//    console.log(result.rows[0].Message);
-//    client.end();
-//  });
-//});
+client.connect(function(err) {
+  if(err) {
+    return console.error('could not connect to postgres', err);
+  }
+  var query = 'SELECT "Id","Message","CustomerMobile","ChatType","Date","IdState","CustomerName","IdAttached" FROM public.incoming;';
+  client.query(query, function(err, result) {
+    if(err) {
+      return console.error('Se presentó error en la ejecución del query.', err);
+    } 
+    console.log(result.rows[0].Message);
+    client.end();
+  });
+});
 
 
 // Server frontpage
