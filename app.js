@@ -100,10 +100,11 @@ function getUserInfo(id, text, time) {
         else{
 
             body = JSON.parse(body);
-            console.log('Nombre: ' + body.first_name + ' ' + body.last_name + ' img:' + body.profile_pic);
-            
+            var customerName = body.first_name + ' ' + body.last_name;
+            var customerImage = body.profile_pic;
+            //console.log('Nombre: ' + body.first_name + ' ' + body.last_name + ' img:' + body.profile_pic);
             // DataBase
-            insertData(id, text, time);
+            insertData(id, text, time, customerName, customerImage);
         }
 
     });
@@ -154,7 +155,7 @@ function kittenMessage(recipientId, text) {
     
 };
 
-function insertData(customerId, message, time){    
+function insertData(customerId, message, time, customerName, customerImage){
     var client = new pg.Client({
         user: "aqqqwndvanofqy",
         password: "okOt8byPmeWttNtfKYY6AB6ihB",
@@ -169,8 +170,8 @@ function insertData(customerId, message, time){
             return console.log('could not connect to postgres2', err);
         }        
         
-        client.query("INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"TimeStamp\",\"IdState\",\"CustomerName\") values($1,$2,$3,$4,$5,$6)",
-            [message, customerId, '1', time, '0', 'Cli1' ], function(err, result) {
+        client.query("INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"TimeStamp\",\"IdState\",\"CustomerName\",\"CustomerImage\") values($1,$2,$3,$4,$5,$6,$7)",
+            [message, customerId, '2', time, '0', customerName, customerImage], function(err, result) {
             if(err) {
                 return console.log('Se presentó error en la ejecución del query2.', err);
             } 
