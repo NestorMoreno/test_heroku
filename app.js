@@ -44,6 +44,7 @@ app.post('/webhook', function (req, res) {
                 var txtMsg = response['result']['fulfillment']['speech'];
                 if (txtMsg) {
                     sendMessage(event.sender.id, {text: txtMsg });
+                    insertData(1, txtMsg, time, 'bot', '');
                 }                
                 // Get User info
                 getUserInfo(event.sender.id, event.message.text, time);
