@@ -101,10 +101,10 @@ function sendMessage(recipientId, message) {
 
 // Get user info
 function getUserInfo(recipientId) {
-
-    console.log("2");
+    var url = 'https://graph.facebook.com/v2.6/' + recipientId + '?fields=first_name,last_name,profile_pic&access_token=' + process.env.PAGE_ACCESS_TOKEN;
+    console.log("2: " + url);
     request({
-        url: 'https://graph.facebook.com/v2.6/' + recipientId + '?fields=first_name,last_name,profile_pic&access_token=' + process.env.PAGE_ACCESS_TOKEN,
+        url: url,
         method: 'GET'
     }, function(error, response, body) {
         if (error) {
