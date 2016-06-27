@@ -58,7 +58,7 @@ app.post('/webhook', function (req, res) {
                 sendMessage(event.sender.id, {text: txtMsg });
 
                 // Get User info
-                getUserInfo(event.sender.id);
+                getUserInfo(event.sender.id, event.message.text, time);
             });
             request.on('error', function(error) {
                 console.log(error);
@@ -96,8 +96,8 @@ function sendMessage(recipientId, message) {
 };
 
 // Get user info
-function getUserInfo(recipientId) {
-    var url = 'https://graph.facebook.com/v2.6/' + recipientId + '?fields=first_name,last_name,profile_pic&access_token=' + process.env.PAGE_ACCESS_TOKEN;
+function getUserInfo(id, text, time) {
+    var url = 'https://graph.facebook.com/v2.6/' + id + '?fields=first_name,last_name,profile_pic&access_token=' + process.env.PAGE_ACCESS_TOKEN;
     console.log("2: " + url);
     request({
         url: url,
@@ -112,7 +112,7 @@ function getUserInfo(recipientId) {
             console.log('ejecución user info Ok. ' + body);
 
             // DataBase
-            insertData(event.sender.id, event.message.text, time);
+            insertData(id, text, time);
 
             //
             console.log('Nombre: ' + response.first_name + ' ' + first_name.last_name + ' img:' + profile_pic);
