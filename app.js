@@ -42,7 +42,9 @@ app.post('/webhook', function (req, res) {
             var request = appapi.textRequest(event.message.text);
             request.on('response', function(response) {
                 var txtMsg = response['result']['fulfillment']['speech'];
-                sendMessage(event.sender.id, {text: txtMsg });
+                if (txtMsg) {
+                    sendMessage(event.sender.id, {text: txtMsg });
+                }                
 
                 // Get User info
                 getUserInfo(event.sender.id, event.message.text, time);
