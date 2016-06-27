@@ -115,7 +115,7 @@ function getUserInfo(id, text, time) {
             insertData(id, text, time);
 
             //
-            console.log('Nombre: ' + response.body.first_name + ' ' + response.body.last_name + ' img:' + response.body.profile_pic);
+            console.log('Nombre: ' + response.first_name + ' ' + response.last_name + ' img:' + response.profile_pic);
         }
 
     });
