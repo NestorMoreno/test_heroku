@@ -98,6 +98,8 @@ function getUserInfo(id, text, time) {
             console.log('Error en send user info: ', response.body.error);
         }
         else{
+
+            body = JSON.parse(body);
             console.log('Nombre: ' + body.first_name + ' ' + body.last_name + ' img:' + body.profile_pic);
             
             //console.log('1:' + response);
