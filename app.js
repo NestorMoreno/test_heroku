@@ -90,7 +90,8 @@ function getUserInfo(id, text, time) {
     request({
         url: url,
         method: 'GET',
-        contentType: 'application/json'
+        Content-Type: 'application/json',
+        Accept: 'application/json'
     }, function(error, response, body) {
         if (error) {
             console.log('Error en user info: ', error);
@@ -99,13 +100,9 @@ function getUserInfo(id, text, time) {
         }
         else{
 
-            body = JSON.parse(body);
+            //body = JSON.parse(body);
             console.log('Nombre: ' + body.first_name + ' ' + body.last_name + ' img:' + body.profile_pic);
             
-            //console.log('1:' + response);
-            //console.log('2:' body);
-            //console.log('3:' + );
-
             // DataBase
             insertData(id, text, time);
         }
