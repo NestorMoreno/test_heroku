@@ -109,13 +109,10 @@ function getUserInfo(id, text, time) {
             console.log('Error en send user info: ', response.body.error);
         }
         else{
-            console.log('ejecución user info Ok. ');
+            console.log('Nombre: ' + response.first_name + ' ' + response.last_name + ' img:' + response.profile_pic);
 
             // DataBase
             insertData(id, text, time);
-
-            //
-            console.log('Nombre: ' + response.first_name + ' ' + response.last_name + ' img:' + response.profile_pic);
         }
 
     });
