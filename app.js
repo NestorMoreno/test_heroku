@@ -59,6 +59,10 @@ app.post('/webhook', function (req, res) {
                
                 // DataBase
                 insertData(event.sender.id, event.message.text, time);
+
+                 console.log("1");
+                // User info
+                getUserInfo(event.sender.id);
             });
             request.on('error', function(error) {
                 console.log(error);
@@ -90,7 +94,27 @@ function sendMessage(recipientId, message) {
         if (error) {
             console.log('Error sending message: ', error);
         } else if (response.body.error) {
-            console.log('Error: ', response.body.error);
+            console.log('Error en send: ', response.body.error);
+        }
+    });
+};
+
+// Get user info
+function getUserInfo(recipientId) {
+
+    console.log("2");
+    request({
+        url: 'https://graph.facebook.com/v2.6/'+recipientId,
+        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+        method: 'POST',
+        json: {
+            '': { 'fields': 'first_name,last_name,profile_pic'}
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error en user info: ', error);
+        } else if (response.body.error) {
+            console.log('Error en send user info: ', response.body.error);
         }
     });
 };
@@ -151,39 +175,19 @@ function insertData(customerId, message, time){
     }); 
 
     client.connect(function(err) {
-    if(err) {
-        return console.log('could not connect to postgres2', err);
-    }
-    
-    
-    client.query("INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"TimeStamp\",\"IdState\",\"CustomerName\") values($1,$2,$3,$4,$5,$6)",
-        [message,customerId,'1',time,'0','Cli1'], function(err, result) {
         if(err) {
-            return console.log('Se presentó error en la ejecución del query2.', err);
-        } 
-        console.log('Inserción Ok.');
-        client.end();
+            return console.log('could not connect to postgres2', err);
+        }        
+        
+        client.query("INSERT INTO public.incoming (\"Message\", \"CustomerMobile\", \"ChatType\",\"TimeStamp\",\"IdState\",\"CustomerName\") values($1,$2,$3,$4,$5,$6)",
+            [message, customerId, '1', time, '0', 'Cli1' ], function(err, result) {
+            if(err) {
+                return console.log('Se presentó error en la ejecución del query2.', err);
+            } 
+            console.log('Inserción Ok.');
+            client.end();
+        });
     });
-});
-
-
-
-// client.connect(function(err) {
-//   if(err) {
-//     return console.error('could not connect to postgres', err);
-//   }
-//   var query = 'SELECT "Id","Message","CustomerMobile","ChatType","Date","IdState","CustomerName","IdAttached" FROM public.incoming;';
-//   client.query(query, function(err, result) {
-//     if(err) {
-//       return console.error('Se presentó error en la ejecución del query.', err);
-//     } 
-//     console.log(result.rows[0].Message);
-//     client.end();
-//   });
-// });
- 
-
-
 }
 
 app.listen();
