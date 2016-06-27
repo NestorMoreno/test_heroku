@@ -89,7 +89,8 @@ function getUserInfo(id, text, time) {
     //console.log("2: " + url);
     request({
         url: url,
-        method: 'GET'
+        method: 'GET',
+        contentType: 'application/json'
     }, function(error, response, body) {
         if (error) {
             console.log('Error en user info: ', error);
@@ -97,7 +98,12 @@ function getUserInfo(id, text, time) {
             console.log('Error en send user info: ', response.body.error);
         }
         else{
-            console.log('Nombre: ' + body['first_name'] + ' ' + body['last_name'] + ' img:' + body['profile_pic']);
+            console.log('Nombre: ' + body.first_name + ' ' + body.last_name + ' img:' + body.profile_pic);
+            
+            //console.log('1:' + response);
+            //console.log('2:' body);
+            //console.log('3:' + );
+
             // DataBase
             insertData(id, text, time);
         }
