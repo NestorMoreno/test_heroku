@@ -45,7 +45,6 @@ app.post('/webhook', function (req, res) {
                 if (txtMsg) {
                     sendMessage(event.sender.id, {text: txtMsg });
                 }                
-
                 // Get User info
                 getUserInfo(event.sender.id, event.message.text, time);
             });
@@ -98,7 +97,12 @@ function getUserInfo(id, text, time) {
             console.log('Error en send user info: ', response.body.error);
         }
         else{
-            console.log('Nombre: ' + response.first_name + ' ' + response.last_name + ' img:' + response.profile_pic);
+            //console.log('Nombre: ' + response.first_name + ' ' + response.last_name + ' img:' + response.profile_pic);
+            
+            console.log('1:' + response);
+            console.log('2:' + body);
+            //console.log('3:' + );
+
             // DataBase
             insertData(id, text, time);
         }
