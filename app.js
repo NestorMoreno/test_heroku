@@ -105,17 +105,19 @@ function getUserInfo(recipientId) {
     console.log("2");
     request({
         url: 'https://graph.facebook.com/v2.6/'+recipientId,
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+        qs: {access_token: process.env.PAGE_ACCESS_TOKEN, 'fields' : 'first_name,last_name,profile_pic'},
         method: 'POST',
-        json: {
-            '': { 'fields': 'first_name,last_name,profile_pic'}
-        }
+        json: {}
     }, function(error, response, body) {
         if (error) {
             console.log('Error en user info: ', error);
         } else if (response.body.error) {
             console.log('Error en send user info: ', response.body.error);
         }
+        else{
+            console.log('ejecución user info Ok.');
+        }
+
     });
 };
 
