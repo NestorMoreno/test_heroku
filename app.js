@@ -109,9 +109,13 @@ function getUserInfo(recipientId) {
             console.log('Error en send user info: ', response.body.error);
         }
         else{
-            console.log('ejecución user info Ok. nombre: ' + response.first_name + ' ' + first_name.last_name + ' img:' + profile_pic);
+            console.log('ejecución user info Ok. ' + body);
+
             // DataBase
             insertData(event.sender.id, event.message.text, time);
+
+            //
+            console.log('Nombre: ' + response.first_name + ' ' + first_name.last_name + ' img:' + profile_pic);
         }
 
     });
