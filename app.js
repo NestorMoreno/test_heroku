@@ -41,13 +41,15 @@ app.post('/webhook', function (req, res) {
             var appapi = apiai("d8ff392035b34e418df6f05f12f101b3");
             var request = appapi.textRequest(event.message.text);
             request.on('response', function(response) {
+                
+                // Get User info and insert message
+                getUserInfo(event.sender.id, event.message.text, time);
                 var txtMsg = response['result']['fulfillment']['speech'];
                 if (txtMsg) {
                     sendMessage(event.sender.id, {text: txtMsg });
                     insertData(1, txtMsg, time, 'bot', '');
                 }                
-                // Get User info
-                getUserInfo(event.sender.id, event.message.text, time);
+                
             });
             request.on('error', function(error) {
                 console.log(error);
