@@ -109,7 +109,7 @@ function getUserInfo(id, text, time) {
             console.log('Error en send user info: ', response.body.error);
         }
         else{
-            console.log('Nombre: ' + response.first_name + ' ' + response.last_name + ' img:' + response.profile_pic);
+            console.log('Nombre: ' + first_name + ' ' + last_name + ' img:' + profile_pic);
 
             // DataBase
             insertData(id, text, time);
