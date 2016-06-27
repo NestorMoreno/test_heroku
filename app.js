@@ -104,10 +104,8 @@ function getUserInfo(recipientId) {
 
     console.log("2");
     request({
-        url: 'https://graph.facebook.com/v2.6/'+recipientId,
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN, 'fields' : 'first_name,last_name,profile_pic'},
-        method: 'POST',
-        json: {}
+        url: 'https://graph.facebook.com/v2.6/' + recipientId + '?fields=first_name,last_name,profile_pic&access_token=' + process.env.PAGE_ACCESS_TOKEN,
+        method: 'GET'
     }, function(error, response, body) {
         if (error) {
             console.log('Error en user info: ', error);
