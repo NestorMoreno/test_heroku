@@ -42,6 +42,10 @@ app.post('/webhook', function (req, res) {
             var request = appapi.textRequest(event.message.text);
             request.on('response', function(response) {
                 
+                var action = var txtMsg = response['result']['action'];
+                console.log(':::' + action);
+
+
                 // Get User info and insert message
                 getUserInfo(event.sender.id, event.message.text, time);
                 var txtMsg = response['result']['fulfillment']['speech'];
