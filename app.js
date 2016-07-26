@@ -32,7 +32,14 @@ app.get(['/webhook'], function(req, res) {
 
 app.get('/sendMessage', function (req, res){
 	sendMessage('10154874290620410', { text: 'Mensaje de prueba'} );
+    res.send('Ok.');
 });
+
+app.post('/sendMessage', function (req, res){
+    sendMessage(req.id, { text: req.message } );
+    res.send('Ok!');
+});
+
 
 // handler receiving messages
 app.post('/webhook', function (req, res) {
