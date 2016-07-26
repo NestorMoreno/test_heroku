@@ -36,7 +36,7 @@ app.get('/sendMessage', function (req, res){
 });
 
 app.post('/sendMessage', function (req, res){
-    //sendMessage(req.body.id, { text: req.body.message } );
+    sendMessage(req.body.id, { text: req.body.message } );
 	// console.log('1' + req.body);
 	// console.log('2' + req.body.entry[0]);
 	// console.log('3' + req.body.entry[0].messaging);
