@@ -43,7 +43,7 @@ app.post('/sendMessage', function (req, res){
 	// console.log('4' + req.body.entry[0].id);
 	// console.log('5' + req.body.entry[0].message);
     //res.send('Ok! ' + req.body + '-' + req.body.entry[0] + '-' + req.body.entry[0].id);
-    res.send('Ok! ' + req.body.id + '-' + req.body.message + '-' + req.id);
+    res.send('Ok ! ' + req.body.id + '-' + req.body.message + '-' + req.id);
 });
 
 
