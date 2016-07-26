@@ -37,7 +37,7 @@ app.get('/sendMessage', function (req, res){
 
 app.post('/sendMessage', function (req, res){
     sendMessage(req.id, { text: req.message } );
-    res.send('Ok!');
+    res.send('Ok! ' + req.id + '-' + req.message);
 });
 
 
