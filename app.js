@@ -36,13 +36,13 @@ app.get('/sendMessage', function (req, res){
 });
 
 app.post('/sendMessage', function (req, res){
-    sendMessage(req.id, { text: req.message } );
-	console.log('1' + req.body);
-	console.log('2' + req.body.entry[0]);
-	console.log('3' + req.body.entry[0].messaging);
-	console.log('4' + req.body.entry[0].id);
-	console.log('5' + req.body.entry[0].message);
-    res.send('Ok! ');
+    sendMessage(req.body.entry[0].id, { text: req.body.entry[0].message } );
+	// console.log('1' + req.body);
+	// console.log('2' + req.body.entry[0]);
+	// console.log('3' + req.body.entry[0].messaging);
+	// console.log('4' + req.body.entry[0].id);
+	// console.log('5' + req.body.entry[0].message);
+    res.send('Ok! ' + req.body + '-' + req.body.entry[0] + '-' + req.body.entry[0].id);
 });
 
 
