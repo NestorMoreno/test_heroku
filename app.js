@@ -31,7 +31,7 @@ app.get(['/webhook'], function(req, res) {
 });
 
 app.get('/sendMessage', function (req, res){
-	sendMessage('10154874290620410', 'Mensaje de prueba');
+	sendMessage('10154874290620410', { text: 'Mensaje de prueba'} );
 });
 
 // handler receiving messages
