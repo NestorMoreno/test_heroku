@@ -75,7 +75,7 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
 });
 
-// generic function sending messages
+// generic function sending messages 
 function sendMessage(recipientId, message) {
 	console.log('Nuevo mensaje: ' + recipientId + '-' + message );
     request({
