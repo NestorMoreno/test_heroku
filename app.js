@@ -36,14 +36,14 @@ app.get('/sendMessage', function (req, res){
 });
 
 app.post('/sendMessage', function (req, res){
-    sendMessage(req.body.id, { text: req.body.message } );
+    //sendMessage(req.body.id, { text: req.body.message } );
 	// console.log('1' + req.body);
 	// console.log('2' + req.body.entry[0]);
 	// console.log('3' + req.body.entry[0].messaging);
 	// console.log('4' + req.body.entry[0].id);
 	// console.log('5' + req.body.entry[0].message);
     //res.send('Ok! ' + req.body + '-' + req.body.entry[0] + '-' + req.body.entry[0].id);
-    res.send('Ok! ' + req.body.length + '-' + req.body.entry);
+    res.send('Ok! ' + req.body.id + '-' + req.body.message);
 });
 
 
