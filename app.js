@@ -4,6 +4,7 @@ var request = require('request');
 var apiai = require('apiai');
 var app = express();
 var pg = require('pg');
+//var sql = require('mssql');
 
 app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -29,8 +30,12 @@ app.get(['/webhook'], function(req, res) {
   }
 });
 
+app.get('/sendMessage' function (req, res){
+	sendMessage('10154874290620410', req.message );
+});
+
 // handler receiving messages
-app.post('/webhook', function (req, res) {
+app.post('/webhook', function (req, ,res) {
     var events = req.body.entry[0].messaging;
     for (i = 0; i < events.length; i++) {
         var event = events[i];
@@ -52,8 +57,7 @@ app.post('/webhook', function (req, res) {
                 if (txtMsg) {
                     sendMessage(event.sender.id, {text: txtMsg });
                     insertData(1, txtMsg, time, 'bot', '');
-                }                
-                
+                } 
             });
             request.on('error', function(error) {
                 console.log(error);
@@ -73,6 +77,7 @@ app.post('/webhook', function (req, res) {
 
 // generic function sending messages
 function sendMessage(recipientId, message) {
+	console.log('Nuevo mensaje: ' + recipientId + '-' message );
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
@@ -113,10 +118,8 @@ function getUserInfo(id, text, time) {
             // DataBase
             insertData(id, text, time, customerName, customerImage);
         }
-
     });
 };
-
 
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
