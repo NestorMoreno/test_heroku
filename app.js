@@ -115,38 +115,36 @@ function kittenMessage(recipientId, text) {
     text = text || "";
     var values = text.split(' ');
     
-    if (values.length === 3 && values[0] === 'gato') {
-        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
+    if (values[0] === 'mensaje') {
             
-            var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
-            
-            message = {
-                "attachment": {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "generic",
-                        "elements": [{
-                            "title": "Título principal",
-                            "subtitle": "Texto de prueba para el mensaje, este es un texto de prueba para el mensaje.",
-                            "image_url": imageUrl ,
-                            "buttons": [{
-                                "type": "web_url",
-                                "url": imageUrl,
-                                "title": "Mostrar imagen"
-                                }, {
-                                "type": "postback",
-                                "title": "Botón de acción",
-                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
-                            }]
-                        }]
-                    }
-                }
-            };
-    
-            sendMessage(recipientId, message);
-            
-            return true;
-        }
+		var imageUrl = "http://dummyimage.com/800x600&text=" + values[1]);
+		
+		message = {
+			"attachment": {
+				"type": "template",
+				"payload": {
+					"template_type": "generic",
+					"elements": [{
+						"title": "Título principal",
+						"subtitle": "Texto de prueba para el mensaje, este es un texto de prueba para el mensaje.",
+						"image_url": imageUrl ,
+						"buttons": [{
+							"type": "web_url",
+							"url": imageUrl,
+							"title": "Mostrar imagen"
+							}, {
+							"type": "postback",
+							"title": "Botón de acción",
+							"payload": "User " + recipientId + " likes kitten " + imageUrl,
+						}]
+					}]
+				}
+			}
+		};
+
+		sendMessage(recipientId, message);
+		
+		return true;
     }
     
     return false;
