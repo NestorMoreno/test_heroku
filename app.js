@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
-var apiai = require('apiai');
 var app = express();
 var pg = require('pg');
 //var sql = require('mssql');
@@ -20,7 +19,7 @@ app.get('/', function(req, res) {
 
 // Facebook Webhook
 app.get(['/webhook'], function(req, res) {
-  if (req.query['hub.verify_token'] === 'falachattoken') {
+  if (req.query['hub.verify_token'] === 'token') {
     res.send(req.query['hub.challenge']);
     console.log('-----------------------------------------:');
     console.log(req.body);
@@ -50,29 +49,11 @@ app.post('/webhook', function (req, res) {
           if (!kittenMessage(event.sender.id, event.message.text)) {
 
             var time = event.timestamp;
-            var appapi = apiai("d8ff392035b34e418df6f05f12f101b3");
-            var request = appapi.textRequest(event.message.text);
-            request.on('response', function(response) {
-                
-                var action = response['result']['action'];
-                console.log(':::' + action);
-
-
-                // Get User info and insert message
-                getUserInfo(event.sender.id, event.message.text, time);
-                var txtMsg = response['result']['fulfillment']['speech'];
-                if (txtMsg) {
-                    sendMessage(event.sender.id, {text: txtMsg });
-                    insertData(1, txtMsg, time, 'bot', '');
-                } 
-            });
-            request.on('error', function(error) {
-                console.log(error);
-                sendMessage(event.sender.id, {text: 'Se presentó error: ' + error});
-            });
-            request.end()
-
-
+            // getUserInfo(event.sender.id, event.message.text, time);
+            
+			sendMessage(event.sender.id, {text: 'Mensaje de prueba' });
+            // insertData(1, txtMsg, time, 'bot', '');
+				
           }else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
           }
