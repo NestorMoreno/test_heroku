@@ -51,7 +51,7 @@ app.post('/webhook', function (req, res) {
             var time = event.timestamp;
             // getUserInfo(event.sender.id, event.message.text, time);
             
-			sendMessage(event.sender.id, {text: 'Mensaje de prueba' });
+			sendMessage(event.sender.id, {text: 'Hola, esta es una respuesta automática para el mensaje:' + event.message.text });
             // insertData(1, txtMsg, time, 'bot', '');
 				
           }else if (event.postback) {
