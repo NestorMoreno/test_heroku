@@ -117,7 +117,7 @@ function kittenMessage(recipientId, text) {
     
     if (values[0] === 'mensaje') {
             
-		var imageUrl = "http://dummyimage.com/800x600&text=" + values[1]);
+		var imageUrl = "http://dummyimage.com/800x600&text=" + values[1];
 		
 		message = {
 			"attachment": {
