@@ -29,16 +29,6 @@ app.get(['/webhook'], function(req, res) {
   }
 });
 
-app.get('/sendMessage', function (req, res){
-	sendMessage('10154874290620410', { text: 'Mensaje de prueba'} );
-    res.send('Ok.');
-});
-
-app.post('/sendMessage', function (req, res){
-    sendMessage(req.body.id, { text: req.body.message } );
-    res.send('Ok ! ' + req.body.id + '-' + req.body.message );
-});
-
 
 // handler receiving messages
 app.post('/webhook', function (req, res) {
